@@ -63,7 +63,7 @@ def load_keepers(run_dir):
 def kept_count(k):
     n = 1 if k.get("lead") else 0
     n += len(k.get("secondary", []))
-    n += sum(len(g.get("handles", [])) for g in k.get("digest", []))
+    n += sum(len(g.get("items") or g.get("handles") or []) for g in k.get("digest", []))
     n += len(k.get("wire", []))
     return n
 

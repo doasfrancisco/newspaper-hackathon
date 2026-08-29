@@ -16,7 +16,6 @@ news/
   2026-08-19_2224/
     raw_batch_1..4.json
     timeline.json
-    images/
     keepers.json        <- NEW, written by the model
     paper/
       index.html        <- NEW, written by the script
@@ -27,9 +26,9 @@ serve_paper.sh          <- NEW, the tailnet host
 send_paper.py           <- NEW, the Resend mailer
 ```
 
-## Steps 1 to 8: no change
+## Steps 1 to 7: no change
 
-Do steps 1 to 8 of `get_news.md` exactly as they are:
+Do steps 1 to 7 of `get_news.md` exactly as they are:
 
 1. Read `taste.md`.
 2. Make the run folder: `mkdir -p news/$(date +%Y-%m-%d_%H%M)`.
@@ -41,13 +40,18 @@ Do steps 1 to 8 of `get_news.md` exactly as they are:
    `<run_dir>/raw_batch_1..4.json`.
 6. Call `playwright_close`.
 7. Run `python3 parse_tweets.py <run_dir>`. Run it one time only.
-8. Run `python3 fetch_images.py <run_dir>`.
+
+Do not run `fetch_images.py`. The front page prints no photographs.
 
 ## Step 9: make the compact list
 
 Print one line for each post from `<run_dir>/timeline.json`: position,
 handle, the first 280 characters, and the media types. Use a small inline
 Python script. Do not read the full JSON into context.
+
+Print the quoted post too, on a second line, when the post has one: handle,
+the first 200 characters, and the media types. Step 10 needs it. Many
+reaction posts hold the artifact only in the quote.
 
 ## Step 10: choose the keepers
 
@@ -66,12 +70,20 @@ This is the only file the model writes. Put it at `<run_dir>/keepers.json`.
   "run": "2026-08-19_2224",
   "date_line": "WEDNESDAY, AUGUST 19, 2026",
   "posts_read": 127,
+  "city": "SAO PAULO",
+  "price": "ONE TOKEN",
+  "desk_note": [
+    "A short note from the desk about this run.",
+    "A second note, or leave the list with one item."
+  ],
   "lead": {
     "position": 119,
     "handle": "pbshgthm",
-    "section": "ENGINEERING WRITE-UPS AND LEARNING",
+    "section": "ENGINEERING WRITE-UPS AND LEARNING CONTENT",
     "headline": "A Single Skill Took Claude Code to a Perfect Score on the ARC-AGI-3 Benchmark",
+    "deck": "One or two lines under the headline that give the result.",
     "body": "Two or three sentences of real facts from the post.",
+    "stats_caption": "One line under the box of statistics.",
     "stats": [
       {"label": "GAMES FINISHED", "value": "25 of 25"},
       {"label": "LEVELS FINISHED", "value": "183 of 183"},
@@ -79,20 +91,33 @@ This is the only file the model writes. Put it at `<run_dir>/keepers.json`.
     ]
   },
   "secondary": [
-    {"position": 105, "handle": "cjc", "section": "AI-BUSINESS CONTENT",
-     "headline": "Stripe Is Buying OpenRouter"},
+    {"position": 105, "handle": "cjc",
+     "section": "AI-BUSINESS CONTENT FOR THE AI FACTORY",
+     "headline": "Stripe Is Buying OpenRouter",
+     "body": "Two sentences of real facts from the post."},
     {"position": 126, "handle": "superwhisper", "section": "NEW AI MODELS",
-     "headline": "Superwhisper Opens the Weights on S1-Mini"},
+     "headline": "Superwhisper Opens the Weights on S1-Mini",
+     "body": "Two sentences of real facts from the post."},
     {"position": 116, "handle": "GeneralistAI", "section": "ROBOTICS AND HARDWARE",
-     "headline": "A One-Shot Learner for the Physical World"}
+     "headline": "A One-Shot Learner for the Physical World",
+     "body": "Two sentences of real facts from the post."}
   ],
+  "digest_note": "One line under the two digest groups, or an empty string.",
   "digest": [
     {"section": "TOOLS THAT CONNECT TO AI AGENTS",
-     "handles": ["Benioff", "ClaudeDevs", "jasonzhou1993", "charlieholtz"],
-     "note": "One line about the strongest item in this group."},
+     "items": [
+       {"handle": "Benioff", "note": "One line about this item."},
+       {"handle": "ClaudeDevs", "note": "One line about this item."},
+       {"handle": "jasonzhou1993", "note": "One line about this item."},
+       {"handle": "charlieholtz", "note": "One line about this item."}
+     ]},
     {"section": "RELEASES AND DEVELOPER TOOLS",
-     "handles": ["RobKnight__", "rauchg", "VictorTaelin", "nutlope"],
-     "note": "One line about the strongest item in this group."}
+     "items": [
+       {"handle": "RobKnight__", "note": "One line about this item."},
+       {"handle": "rauchg", "note": "One line about this item."},
+       {"handle": "VictorTaelin", "note": "One line about this item."},
+       {"handle": "nutlope", "note": "One line about this item."}
+     ]}
   ],
   "wire": [
     {"handle": "cursor_ai", "note": ""},
@@ -108,14 +133,32 @@ Rules for the fields:
 |---|---|---|
 | `headline` (lead) | 80 characters | The layout is fixed. Longer text is cut. |
 | `headline` (secondary) | 46 characters | |
-| `body` | 700 characters | |
+| `body` (lead) | 700 characters | The script cuts it into 3 paragraphs. |
+| `body` (secondary) | 560 characters | The script cuts it into 2 paragraphs. |
+| `deck` (lead) | 260 characters | Optional. |
+| `stats_caption` (lead) | 200 characters | Optional. |
 | `stats` | exactly 3 | Label 22 characters, value 16. |
-| `note` | 92 characters | An empty string is allowed. |
-| `section` | Use the six names of `get_news.md` step 12, in capitals. |
+| `note` (wire) | 92 characters | An empty string is allowed. |
+| `note` (digest item) | 160 characters | One for each of the 4 handles. |
+| `digest_note` | 92 characters | Optional. One line under the two groups. |
+| `desk_note` | 320 characters each | Optional. A list of 1 or 2 strings. |
+| `city` | 28 characters | Optional. |
+| `price` | 12 characters | Optional. |
+| `section` | Use the six names of `get_news.md` step 12, in capitals. Use headings 1 to 6 only. |
 | `handle` | No `@`. The script adds it. |
 
-Counts: 1 lead, 3 secondary, 2 digest groups of 4 handles, 12 wire items.
+Each digest group uses `items`, a list of 4 objects with a `handle` and a
+`note`. The template shows one note for each handle.
+
+Counts: 1 lead, 3 secondary, 2 digest groups of 4 items, 12 wire items.
 1 + 3 + 8 + 12 = 24.
+
+The page carries no photographs. It is set in type only, as a 1980s
+broadsheet was on the day it went to press.
+
+The script prints `N of 82 slots filled`. With all the fields above, N is
+81. The 82nd slot is a lead photograph that this workflow does not use.
+A low number means that fields are missing.
 
 Take every fact from `<run_dir>/timeline.json`. Do not invent a product, a
 number, or a link.
@@ -132,9 +175,7 @@ The script:
 2. Replaces each `{{SLOT}}` token with its value, escaped for HTML.
 3. Cuts any string that is longer than its limit and adds an ellipsis.
 4. Removes the block of a slot that has no value.
-5. Embeds the lead image from `<run_dir>/images/` as a base64 data URI, so
-   the page is one file with no external assets.
-6. Writes `<run_dir>/paper/index.html`.
+5. Writes `<run_dir>/paper/index.html`, one file with no external assets.
 
 The script calls no model and reaches no network. It always gives the same
 output for the same input.

@@ -33,7 +33,7 @@ empty and the builder removes its block.
 | `digest_note` | 92 | The italic line under 'The Digest'. |
 | `lead.deck` | 260 | The italic standfirst. |
 | `lead.stats_caption` | 200 | The caption under the stat table. |
-| `lead.image` | - | Path of the lead photo, relative to `<run_dir>`. |
+| `lead.image` | - | Path of the lead photo, relative to `<run_dir>`. **Not used.** `get_news_v2.md` prints no photographs, so this field stays absent and the builder removes the block. The support is kept for a workflow that wants a photo. |
 | `secondary[].body` | 560 | The body of a secondary item. A string, or a list of 2 strings. |
 | `digest[].items` | - | A list of 4 `{handle, note}`. The spec gives `handles` and one group `note`; both forms work. |
 | `desk_note` | 320 each | A list of 2 strings for the boxed note. |
