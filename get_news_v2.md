@@ -24,6 +24,7 @@ templates/
   frontpage.html        <- the 1980s design, with {{SLOT}} tokens
 build_newspaper.py      <- NEW, the deterministic builder
 serve_paper.sh          <- NEW, the tailnet host
+send_paper.py           <- NEW, the Resend mailer
 ```
 
 ## Steps 1 to 8: no change
@@ -162,11 +163,37 @@ Run:      news/2026-08-19_2224
 Read:     127 posts, 24 kept
 Page:     news/2026-08-19_2224/paper/index.html
 URL:      http://<tailnet-ip>:8899/
+Mail:     sent to <recipient>
 Skipped:  funding and VC, hot takes, memes, personal posts
 ```
 
 If the user asks for a post in full, read it from `<run_dir>/timeline.json`
 and show it as a block quote.
+
+## Step 15: email the front page
+
+```
+python3 send_paper.py <run_dir>
+```
+
+The script reads `<run_dir>/keepers.json`, makes
+`<run_dir>/paper/frontpage.pdf` from the page if it is not there yet, and
+sends it through Resend as an attachment. The body of the mail holds the
+lead, the three secondary headlines, and the counts. Add `--dry-run` to
+print the payload and send nothing.
+
+`.env` holds the settings. `.gitignore` excludes that file.
+
+| Key | Note |
+|---|---|
+| `RESEND` | The API key. |
+| `MAIL_TO` | The recipient. |
+| `MAIL_FROM` | `onboarding@resend.dev` until a domain is verified. |
+| `PAPER_URL` | Optional. A link in the mail body. |
+
+A Resend account with no verified domain sends only from
+`onboarding@resend.dev` and only to the address that owns the account. To
+mail any other address, verify a domain first.
 
 ## Optional: a PDF
 
