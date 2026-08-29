@@ -34,16 +34,20 @@ for _i in range(1, 5):
     LIMITS["DIGEST2_H%d" % _i] = 24
     LIMITS["DIGEST1_T%d" % _i] = 160
     LIMITS["DIGEST2_T%d" % _i] = 160
-for _i in range(1, 13):
-    LIMITS["WIRE%d_HANDLE" % _i] = 24
-    LIMITS["WIRE%d_NOTE" % _i] = 92
-
 LEAD_BODY_LIMIT = 1950
 SEC1_BODY_LIMIT = 560
 SEC_BODY_LIMIT = 560
+WIRE_NOTE_LIMIT = 130
+SPEC_LIMITS = {"lead_headline": 80, "secondary_headline": 46, "body": 700,
+               "stat_label": 22, "stat_value": 16, "note": 92}
 
-OPEN_TAG = re.compile(r'^<div class="[^"]*">$')
+for _i in range(1, 13):
+    LIMITS["WIRE%d_HANDLE" % _i] = 24
+    LIMITS["WIRE%d_NOTE" % _i] = WIRE_NOTE_LIMIT
+
 RULE_TAG = re.compile(r'^<div class="(?:hair1-(?:816|370|300)|vrule)"></div>$')
+GROUP_HEADS = ('<div class="stat-row">', '<div class="wire-col">',
+               '<div class="rule1-370"></div>')
 
 
 def die(msg):
@@ -257,23 +261,10 @@ def tidy_rules(text):
                 if cand.strip():
                     prev = cand.strip()
                     break
-            if prev == "" or RULE_TAG.match(prev) or OPEN_TAG.match(prev):
+            if prev in GROUP_HEADS or RULE_TAG.match(prev):
                 continue
         out.append(line)
-    result = []
-    for line in reversed(out):
-        s = line.strip()
-        if RULE_TAG.match(s):
-            nxt = ""
-            for cand in reversed(result):
-                if cand.strip():
-                    nxt = cand.strip()
-                    break
-            if nxt == "</div>":
-                continue
-        result.append(line)
-    result.reverse()
-    return "\n".join(result)
+    return "\n".join(out)
 
 
 def main():

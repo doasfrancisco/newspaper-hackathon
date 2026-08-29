@@ -163,7 +163,7 @@ Run:      news/2026-08-19_2224
 Read:     127 posts, 24 kept
 Page:     news/2026-08-19_2224/paper/index.html
 URL:      http://<tailnet-ip>:8899/
-Mail:     sent to <recipient>
+Mail:     PDF sent to plinio.avendano@utec.edu.pe
 Skipped:  funding and VC, hot takes, memes, personal posts
 ```
 
@@ -176,6 +176,8 @@ and show it as a block quote.
 python3 send_paper.py <run_dir>
 ```
 
+The last step of a run mails the PDF to **plinio.avendano@utec.edu.pe**.
+
 The script reads `<run_dir>/keepers.json`, makes
 `<run_dir>/paper/frontpage.pdf` from the page if it is not there yet, and
 sends it through Resend as an attachment. The body of the mail holds the
@@ -187,13 +189,14 @@ print the payload and send nothing.
 | Key | Note |
 |---|---|
 | `RESEND` | The API key. |
-| `MAIL_TO` | The recipient. |
+| `MAIL_TO` | The recipient, `plinio.avendano@utec.edu.pe`. |
 | `MAIL_FROM` | `onboarding@resend.dev` until a domain is verified. |
 | `PAPER_URL` | Optional. A link in the mail body. |
 
 A Resend account with no verified domain sends only from
-`onboarding@resend.dev` and only to the address that owns the account. To
-mail any other address, verify a domain first.
+`onboarding@resend.dev` and only to the address that owns the account. The
+recipient is the owner of the key, thus the send works. To mail any other
+address, verify a domain first.
 
 ## Optional: a PDF
 
