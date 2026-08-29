@@ -41,6 +41,8 @@ request, so the result shows the proxy exit IP, not the machine IP.
 The IP is correct. Every x.com request in this work went through the same
 browser, so every request used the proxy.
 
+The build of the chain and the repair steps are in `residential_proxy.md`.
+
 Note: an in-page `fetch()` to `ipinfo.io` from the x.com origin fails with a
 CORS error. Use a navigation to `ipinfo.io`, not a fetch from the x.com page.
 

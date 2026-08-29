@@ -27,6 +27,8 @@ news/
 - `parse_tweets.py` — the parser. Usage: `python3 parse_tweets.py <run_dir>`.
 - `fetch_images.py` — the image downloader. Usage:
   `python3 fetch_images.py <run_dir>`.
+- `residential_proxy.md` — what the proxy is, how to check it, and how
+  to repair it.
 
 ## Step 1: Read the taste profile
 
