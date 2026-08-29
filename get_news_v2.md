@@ -181,14 +181,44 @@ PDF is one page at the size of the design.
 
 ## Optional: Convex
 
-Convex can hold the runs and give a public URL. Keep it small:
+Convex gives the page a permanent public URL, so you do not need the VPN.
 
-- One table, `editions`: `runId`, `dateLine`, `postsRead`, `keptCount`,
-  `html`.
-- One mutation, `editions.publish`, that the VPS calls after step 12.
-- One `httpAction`, `GET /paper/:runId`, that returns the HTML.
+Three files, and no change to the Python:
 
-Run it locally with `npx convex dev --local`. This needs no cloud account.
+```
+convex/schema.ts      one table, editions, indexed by runId
+convex/editions.ts    publish (upsert), byRun, latest
+convex/http.ts        GET /paper/:runId and GET /paper/latest
+```
+
+Deploy one time:
+
+```
+CONVEX_DEPLOY_KEY=... npx convex deploy
+```
+
+Publish after step 12:
+
+```
+npx convex run editions:publish --push "$(python3 - "$RUN_DIR" <<'PY'
+import json, sys, pathlib
+d = pathlib.Path(sys.argv[1])
+k = json.loads((d / "keepers.json").read_text())
+print(json.dumps({
+    "runId": k["run"],
+    "dateLine": k["date_line"],
+    "postsRead": k["posts_read"],
+    "keptCount": 24,
+    "html": (d / "paper" / "index.html").read_text(),
+}))
+PY
+)"
+```
+
+The page is then at `https://<deployment>.convex.site/paper/<runId>`, and the
+newest one is always at `/paper/latest`.
+
+Keep the deploy key in `.env.local`. `.gitignore` excludes that file.
 
 Convex cannot do steps 3 to 6. Its functions run in a datacentre, thus their
 IP has the `hosting` class that X rejects. The browser stays on the VPS.

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{PAPER_NAME}} — {{DATE_LINE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400..700;1,400..700&amp;family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Instrument+Serif:ital@0;1&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;display=block">
+<style>
+:root{
+--color-newsprint:#EFE9DC;
+--color-newsprint-deep:#E3DCCB;
+--color-ink:#1C1A17;
+--color-ink-soft:#4A453D;
+--color-rule:#9A9285;
+--color-screen:#CFC7B6;
+--color-spot:#B23A2F;
+--font-display:"Bodoni Moda","Bodoni 72",Didot,"Playfair Display","Times New Roman",serif;
+--font-head:"Instrument Serif","Times New Roman",Georgia,serif;
+--font-body:"PT Serif",Georgia,"Liberation Serif","Times New Roman",serif;
+--font-label:"Archivo Narrow","Liberation Sans Narrow","Arial Narrow",Helvetica,Arial,sans-serif;
+--halftone-opacity:0.05;
+}
+*{box-sizing:border-box;margin:0;padding:0;border:0;}
+html,body{background:var(--color-newsprint);}
+.t{white-space:pre-wrap;}
+.page{position:relative;isolation:isolate;width:1400px;height:2120px;display:flex;flex-direction:column;overflow:clip;padding:44px 64px 36px;background:var(--color-newsprint);font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+.halftone{position:absolute;left:0;top:0;width:1400px;height:2120px;z-index:-1;opacity:var(--halftone-opacity);pointer-events:none;}
+
+.eyebrow{display:flex;flex-direction:column;flex-shrink:0;gap:6px;width:1272px;}
+.rule1-1272{height:1px;width:1272px;flex-shrink:0;background:var(--color-ink);}
+.rule7-1272{height:7px;width:1272px;flex-shrink:0;background:var(--color-ink);}
+.edition-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0 6px;width:1272px;}
+.edition{color:var(--color-ink-soft);font-family:var(--font-label);font-size:11px;font-weight:600;letter-spacing:.26em;line-height:14px;}
+
+.masthead{display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:16px;width:1272px;}
+.wordmark{display:flex;flex-shrink:0;height:126px;justify-content:center;position:relative;width:1272px;}
+.wm{width:1272px;text-align:center;font-family:var(--font-display);font-size:146px;font-weight:900;letter-spacing:.03em;line-height:126px;display:flex;flex-wrap:wrap;justify-content:center;}
+.wm-red{position:absolute;left:-2px;top:-1px;color:var(--color-spot);opacity:.5;}
+.wm-ink{position:relative;flex-shrink:0;color:var(--color-ink);text-shadow:#1C1A17 0 0 1.1px;}
+.mast-rules{display:flex;flex-direction:column;padding-top:14px;width:1272px;}
+.rule-red5{height:5px;width:1272px;flex-shrink:0;background:var(--color-spot);}
+.gap3{height:3px;width:1272px;flex-shrink:0;}
+.folio-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;width:1272px;}
+.folio{color:var(--color-ink);font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.26em;line-height:14px;}
+
+.main-row{display:flex;flex-shrink:0;padding-top:18px;width:1272px;}
+.lead{display:flex;flex-direction:column;flex-shrink:0;width:840px;}
+.lead-head{display:flex;flex-direction:column;gap:12px;padding-bottom:14px;padding-right:24px;width:840px;}
+.kicker{color:var(--color-spot);font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.18em;line-height:14px;}
+.lead-hl{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:68px;letter-spacing:-.015em;line-height:62px;width:816px;}
+.deck-wrap{font-family:var(--font-body);padding-top:2px;width:816px;}
+.deck{color:var(--color-ink-soft);font-family:var(--font-body);font-weight:400;font-size:21px;font-style:italic;line-height:29px;}
+
+.byline{display:flex;flex-direction:column;width:816px;}
+.rule1-816{height:1px;width:816px;flex-shrink:0;background:var(--color-ink);}
+.hair1-816{height:1px;width:816px;flex-shrink:0;background:var(--color-rule);}
+.rule4-816{height:4px;width:816px;flex-shrink:0;background:var(--color-ink);}
+.byline-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;width:816px;}
+.by{color:var(--color-ink);font-family:var(--font-label);font-size:12px;font-weight:700;letter-spacing:.16em;line-height:16px;text-transform:uppercase;}
+.by-src{color:var(--color-ink-soft);font-family:var(--font-label);font-size:11px;font-weight:400;letter-spacing:.16em;line-height:14px;}
+
+.stat{display:flex;flex-direction:column;padding-top:16px;width:816px;}
+.stat-row{display:flex;padding:16px 0;width:816px;}
+.stat-cell{display:flex;flex-direction:column;flex-shrink:0;gap:6px;}
+.stat-lab{color:var(--color-ink-soft);font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.18em;line-height:14px;}
+.stat-lab-spot{color:var(--color-spot);font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.18em;line-height:14px;}
+.stat-val{color:var(--color-ink-soft);font-family:var(--font-head);font-weight:400;font-size:52px;letter-spacing:-.02em;line-height:52px;}
+.stat-val-ink{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:52px;letter-spacing:-.02em;line-height:52px;}
+.vrule{align-self:stretch;background:var(--color-rule);width:1px;flex-shrink:0;}
+.vrule-ink{align-self:stretch;background:var(--color-ink);width:1px;flex-shrink:0;}
+.cap-wrap{font-family:var(--font-body);padding-top:8px;width:816px;}
+.cap{color:var(--color-ink-soft);font-family:var(--font-body);font-weight:400;font-size:12px;font-style:italic;line-height:17px;}
+
+.lead-body{display:flex;padding-top:18px;width:816px;}
+.colA{display:flex;align-items:flex-start;flex-shrink:0;gap:7px;width:258px;}
+.dropcap{color:var(--color-ink);flex-shrink:0;font-family:var(--font-display);font-size:54px;font-weight:900;line-height:41px;}
+.bodycol{color:var(--color-ink);flex-shrink:0;font-family:var(--font-body);font-weight:400;font-size:13px;line-height:19px;text-align:justify;}
+.w219{width:219px;}
+.w258{width:258px;}
+.vwrap21{display:flex;flex-shrink:0;justify-content:center;width:21px;}
+.vwrap24{display:flex;flex-shrink:0;justify-content:center;width:24px;}
+
+.jump{display:flex;flex-direction:column;padding-top:12px;width:816px;}
+.jump-wrap{font-family:var(--font-body);padding-top:7px;width:816px;}
+.jump-t{color:var(--color-ink);display:flex;flex-wrap:wrap;font-family:var(--font-body);font-weight:400;font-size:13px;font-style:italic;justify-content:flex-end;line-height:19px;text-align:right;}
+
+.sidebar{display:flex;flex-direction:column;flex-shrink:0;width:408px;}
+.digest{background:var(--color-newsprint-deep);border:1px solid var(--color-ink);display:flex;flex-direction:column;padding:16px 18px;width:408px;}
+.digest-title{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:30px;letter-spacing:-.01em;line-height:32px;width:370px;}
+.digest-sub-wrap{font-family:var(--font-body);padding-top:4px;width:370px;}
+.digest-sub{color:var(--color-ink-soft);font-family:var(--font-body);font-weight:400;font-size:12px;font-style:italic;line-height:16px;padding-bottom:11px;}
+.rule-spot3{height:3px;width:370px;flex-shrink:0;background:var(--color-spot);}
+.dgroup{display:flex;flex-direction:column;width:370px;}
+.dg1{padding-top:13px;}
+.dg2{padding-top:16px;}
+.dkick-wrap{font-family:var(--font-label);padding-bottom:9px;}
+.rule1-370{height:1px;width:370px;flex-shrink:0;background:var(--color-ink);}
+.hair1-370{height:1px;width:370px;flex-shrink:0;background:var(--color-rule);}
+.item{display:flex;flex-direction:column;gap:3px;padding:9px 0;}
+.handle{color:var(--color-ink);font-family:var(--font-label);font-size:11px;font-weight:700;letter-spacing:.12em;line-height:14px;text-transform:uppercase;}
+.itext{color:var(--color-ink);font-family:var(--font-body);font-weight:400;font-size:12px;line-height:17px;}
+.w370{width:370px;}
+.w300{width:300px;}
+
+.aibiz{display:flex;flex-direction:column;padding-top:22px;width:408px;}
+.rule4-408{height:4px;width:408px;flex-shrink:0;background:var(--color-ink);}
+.kick-wrap11{font-family:var(--font-label);padding-top:11px;}
+.head30-wrap{font-family:var(--font-head);padding-top:7px;width:408px;}
+.head30{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:30px;letter-spacing:-.01em;line-height:31px;}
+.p-wrap{font-family:var(--font-body);padding-top:9px;width:408px;}
+.p125{color:var(--color-ink);font-family:var(--font-body);font-weight:400;font-size:12.5px;line-height:18px;text-align:justify;}
+
+.sec-row{display:flex;flex-shrink:0;padding-top:28px;width:1272px;}
+.sec{display:flex;flex-direction:column;flex-shrink:0;width:624px;}
+.rule4-624{height:4px;width:624px;flex-shrink:0;background:var(--color-ink);}
+.sec-head-wrap{font-family:var(--font-head);padding-top:8px;width:624px;}
+.sec-head{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:38px;letter-spacing:-.015em;line-height:39px;}
+.sec-cols{display:flex;padding-top:12px;width:624px;}
+.sec-col{color:var(--color-ink);flex-shrink:0;font-family:var(--font-body);font-weight:400;font-size:12.5px;line-height:18px;text-align:justify;width:300px;}
+
+.wire{display:flex;flex-direction:column;flex-shrink:0;padding-top:26px;width:1272px;}
+.wire-head-row{display:flex;align-items:baseline;justify-content:space-between;padding:10px 0 11px;width:1272px;}
+.wire-title{color:var(--color-ink);font-family:var(--font-head);font-weight:400;font-size:26px;line-height:27px;}
+.wire-cols{display:flex;padding-top:12px;width:1272px;}
+.wire-col{display:flex;flex-direction:column;flex-shrink:0;gap:11px;width:300px;}
+.wire-item{display:flex;flex-direction:column;gap:3px;}
+.hair1-300{height:1px;width:300px;flex-shrink:0;background:var(--color-rule);}
+
+.desk{display:flex;flex-direction:column;flex-shrink:0;padding-top:24px;width:1272px;}
+.desk-box{align-items:flex-start;display:flex;padding:13px 18px 14px;width:1272px;border-bottom:1px solid var(--color-ink);border-left:1px solid var(--color-ink);border-right:1px solid var(--color-ink);}
+.desk-lab{flex-shrink:0;font-family:var(--font-label);padding-top:2px;width:236px;}
+.desk-t{color:var(--color-ink);flex-shrink:0;font-family:var(--font-body);font-weight:400;font-size:12px;line-height:17px;text-align:justify;width:490px;}
+.desk-gap{flex-shrink:0;width:24px;}
+
+.footer{display:flex;flex-direction:column;flex-shrink:0;padding-top:26px;width:1272px;}
+.footer-row{display:flex;align-items:center;justify-content:space-between;padding-top:9px;width:1272px;}
+.foot{color:var(--color-ink-soft);font-family:var(--font-label);font-size:11px;font-weight:600;letter-spacing:.2em;line-height:14px;}
+
+.lead-figure{flex:1 1 0;min-height:0;overflow:hidden;margin-top:16px;display:flex;width:816px;}
+.lead-figure img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.08);}
+@page{size:1400px 2120px;margin:0;}
+@media print{
+html,body{width:1400px;height:2120px;margin:0;padding:0;background:var(--color-newsprint);}
+.page{margin:0;break-inside:avoid;page-break-inside:avoid;break-after:avoid;page-break-after:avoid;}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+<svg class="halftone" width="1400" height="2120" viewBox="0 0 1400 2120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><pattern id="halftone" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="1" cy="1" r="0.9" fill="#CFC7B6"></circle></pattern></defs><rect x="0" y="0" width="1400" height="2120" fill="url(#halftone)"></rect></svg>
+
+<div class="eyebrow">
+<div class="rule1-1272"></div>
+<div class="edition-row">
+<div class="edition t">LATE CITY EDITION</div>
+<div class="edition t">THE NEWS DIGEST OF RECORD</div>
+<div class="edition t">FOUR SECTIONS  ·  12 PAGES</div>
+</div>
+<div class="rule7-1272"></div>
+</div>
+
+<div class="masthead">
+<div class="wordmark">
+<div class="wm wm-red t">{{PAPER_NAME}}</div>
+<div class="wm wm-ink t">{{PAPER_NAME}}</div>
+</div>
+<div class="mast-rules">
+<div class="rule-red5"></div>
+<div class="gap3"></div>
+<div class="rule1-1272"></div>
+<div class="folio-row">
+<div class="folio t">VOL. {{VOL}}  —  NO. {{NO}}</div>
+<div class="folio t">{{DATE_LINE}}</div>
+<div class="folio t">{{CITY}}</div>
+<div class="folio t">{{PRICE}}</div>
+</div>
+<div class="rule1-1272"></div>
+</div>
+</div>
+
+<div class="main-row">
+<div class="lead">
+
+<div class="lead-head">
+<div class="kicker t">{{LEAD_SECTION}}</div>
+<div class="lead-hl t">{{LEAD_HEADLINE}}</div>
+<div class="deck-wrap">
+<div class="deck t">{{LEAD_DECK}}</div>
+</div>
+</div>
+
+<div class="byline">
+<div class="rule1-816"></div>
+<div class="byline-row">
+<div class="by t">BY @{{LEAD_HANDLE}}</div>
+<div class="by-src t">{{LEAD_SOURCE}}</div>
+</div>
+<div class="hair1-816"></div>
+</div>
+
+<div class="stat">
+<div class="rule4-816"></div>
+<div class="stat-row">
+<!--B:STAT1-->
+<div class="stat-cell" style="width:272px">
+<div class="stat-lab t">{{STAT1_LABEL}}</div>
+<div class="stat-val t">{{STAT1_VALUE}}</div>
+</div>
+<!--/B:STAT1-->
+<!--B:STAT2-->
+<div class="vrule"></div>
+<div class="stat-cell" style="width:271px;padding-left:24px">
+<div class="stat-lab t">{{STAT2_LABEL}}</div>
+<div class="stat-val t">{{STAT2_VALUE}}</div>
+</div>
+<!--/B:STAT2-->
+<!--B:STAT3-->
+<div class="vrule"></div>
+<div class="stat-cell" style="width:271px;padding-left:24px">
+<div class="stat-lab-spot t">{{STAT3_LABEL}}</div>
+<div class="stat-val-ink t">{{STAT3_VALUE}}</div>
+</div>
+<!--/B:STAT3-->
+</div>
+<div class="rule1-816"></div>
+<div class="cap-wrap">
+<div class="cap t">{{LEAD_CAPTION}}</div>
+</div>
+</div>
+
+<div class="lead-body">
+<div class="colA">
+<div class="dropcap t">{{LEAD_DROPCAP}}</div>
+<div class="bodycol w219 t">{{LEAD_BODY_1}}</div>
+</div>
+<div class="vwrap21"><div class="vrule"></div></div>
+<div class="bodycol w258 t">{{LEAD_BODY_2}}</div>
+<div class="vwrap21"><div class="vrule"></div></div>
+<div class="bodycol w258 t">{{LEAD_BODY_3}}</div>
+</div>
+
+<div class="jump">
+<div class="hair1-816"></div>
+<div class="jump-wrap">
+<div class="jump-t t">Continued on Page 4</div>
+</div>
+</div>
+<!--B:LEAD_IMAGE-->
+<div class="lead-figure">{{LEAD_IMAGE}}</div>
+<!--/B:LEAD_IMAGE-->
+
+</div>
+
+<div class="vwrap24"><div class="vrule"></div></div>
+
+<div class="sidebar">
+<div class="digest">
+<div class="digest-title t">The Digest</div>
+<div class="digest-sub-wrap">
+<div class="digest-sub t">{{DIGEST_NOTE}}</div>
+</div>
+<div class="rule-spot3"></div>
+<!--B:DIGEST1_GROUP-->
+<div class="dgroup dg1">
+<div class="dkick-wrap"><div class="kicker t">{{DIGEST1_SECTION}}</div></div>
+<div class="rule1-370"></div>
+<!--B:DIGEST1_ITEM1-->
+<div class="item">
+<div class="handle t">@{{DIGEST1_H1}}</div>
+<div class="itext w370 t">{{DIGEST1_T1}}</div>
+</div>
+<!--/B:DIGEST1_GROUP-->
+<!--/B:DIGEST1_ITEM1-->
+<!--B:DIGEST1_ITEM2-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST1_H2}}</div>
+<div class="itext w370 t">{{DIGEST1_T2}}</div>
+</div>
+<!--/B:DIGEST1_ITEM2-->
+<!--B:DIGEST1_ITEM3-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST1_H3}}</div>
+<div class="itext w370 t">{{DIGEST1_T3}}</div>
+</div>
+<!--/B:DIGEST1_ITEM3-->
+<!--B:DIGEST1_ITEM4-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST1_H4}}</div>
+<div class="itext w370 t">{{DIGEST1_T4}}</div>
+</div>
+<!--/B:DIGEST1_ITEM4-->
+</div>
+<!--B:DIGEST2_GROUP-->
+<div class="dgroup dg2">
+<div class="dkick-wrap"><div class="kicker t">{{DIGEST2_SECTION}}</div></div>
+<div class="rule1-370"></div>
+<!--B:DIGEST2_ITEM1-->
+<div class="item">
+<div class="handle t">@{{DIGEST2_H1}}</div>
+<div class="itext w370 t">{{DIGEST2_T1}}</div>
+</div>
+<!--/B:DIGEST2_GROUP-->
+<!--/B:DIGEST2_ITEM1-->
+<!--B:DIGEST2_ITEM2-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST2_H2}}</div>
+<div class="itext w370 t">{{DIGEST2_T2}}</div>
+</div>
+<!--/B:DIGEST2_ITEM2-->
+<!--B:DIGEST2_ITEM3-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST2_H3}}</div>
+<div class="itext w370 t">{{DIGEST2_T3}}</div>
+</div>
+<!--/B:DIGEST2_ITEM3-->
+<!--B:DIGEST2_ITEM4-->
+<div class="hair1-370"></div>
+<div class="item">
+<div class="handle t">@{{DIGEST2_H4}}</div>
+<div class="itext w370 t">{{DIGEST2_T4}}</div>
+</div>
+<!--/B:DIGEST2_ITEM4-->
+</div>
+</div>
+
+<!--B:SEC1-->
+<div class="aibiz">
+<div class="rule4-408"></div>
+<div class="kick-wrap11"><div class="kicker t">{{SEC1_SECTION}}</div></div>
+<div class="head30-wrap"><div class="head30 t">{{SEC1_HEADLINE}}</div></div>
+<div class="p-wrap"><div class="p125 t">{{SEC1_BODY_1}}</div></div>
+<div class="p-wrap"><div class="p125 t">{{SEC1_BODY_2}}</div></div>
+</div>
+<!--/B:SEC1-->
+</div>
+</div>
+
+<div class="sec-row">
+<!--B:SEC2-->
+<div class="sec">
+<div class="rule4-624"></div>
+<div class="kick-wrap11"><div class="kicker t">{{SEC2_SECTION}}</div></div>
+<div class="sec-head-wrap"><div class="sec-head t">{{SEC2_HEADLINE}}</div></div>
+<div class="sec-cols">
+<div class="sec-col t">{{SEC2_BODY_1}}</div>
+<div class="vwrap24"><div class="vrule"></div></div>
+<div class="sec-col t">{{SEC2_BODY_2}}</div>
+</div>
+<!--/B:SEC2-->
+</div>
+<!--B:SEC3-->
+<div class="vwrap24"><div class="vrule-ink"></div></div>
+<div class="sec">
+<div class="rule4-624"></div>
+<div class="kick-wrap11"><div class="kicker t">{{SEC3_SECTION}}</div></div>
+<div class="sec-head-wrap"><div class="sec-head t">{{SEC3_HEADLINE}}</div></div>
+<div class="sec-cols">
+<div class="sec-col t">{{SEC3_BODY_1}}</div>
+<div class="vwrap24"><div class="vrule"></div></div>
+<div class="sec-col t">{{SEC3_BODY_2}}</div>
+</div>
+<!--/B:SEC3-->
+</div>
+</div>
+
+<div class="wire">
+<div class="rule7-1272"></div>
+<div class="wire-head-row">
+<div class="wire-title t">Also on the Wire</div>
+<div class="kicker t">RELEASES, WRITE-UPS AND BUILD RESOURCES</div>
+</div>
+<div class="rule1-1272"></div>
+<div class="wire-cols">
+<div class="wire-col">
+<!--B:WIRE1-->
+<div class="wire-item">
+<div class="handle t">@{{WIRE1_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE1_NOTE}}</div>
+</div>
+<!--/B:WIRE1-->
+<!--B:WIRE2-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE2_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE2_NOTE}}</div>
+</div>
+<!--/B:WIRE2-->
+<!--B:WIRE3-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE3_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE3_NOTE}}</div>
+</div>
+<!--/B:WIRE3-->
+</div>
+<div class="vwrap24"><div class="vrule"></div></div>
+<div class="wire-col">
+<!--B:WIRE4-->
+<div class="wire-item">
+<div class="handle t">@{{WIRE4_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE4_NOTE}}</div>
+</div>
+<!--/B:WIRE4-->
+<!--B:WIRE5-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE5_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE5_NOTE}}</div>
+</div>
+<!--/B:WIRE5-->
+<!--B:WIRE6-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE6_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE6_NOTE}}</div>
+</div>
+<!--/B:WIRE6-->
+</div>
+<div class="vwrap24"><div class="vrule"></div></div>
+<div class="wire-col">
+<!--B:WIRE7-->
+<div class="wire-item">
+<div class="handle t">@{{WIRE7_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE7_NOTE}}</div>
+</div>
+<!--/B:WIRE7-->
+<!--B:WIRE8-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE8_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE8_NOTE}}</div>
+</div>
+<!--/B:WIRE8-->
+<!--B:WIRE9-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE9_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE9_NOTE}}</div>
+</div>
+<!--/B:WIRE9-->
+</div>
+<div class="vwrap24"><div class="vrule"></div></div>
+<div class="wire-col">
+<!--B:WIRE10-->
+<div class="wire-item">
+<div class="handle t">@{{WIRE10_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE10_NOTE}}</div>
+</div>
+<!--/B:WIRE10-->
+<!--B:WIRE11-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE11_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE11_NOTE}}</div>
+</div>
+<!--/B:WIRE11-->
+<!--B:WIRE12-->
+<div class="hair1-300"></div>
+<div class="wire-item">
+<div class="handle t">@{{WIRE12_HANDLE}}</div>
+<div class="itext w300 t">{{WIRE12_NOTE}}</div>
+</div>
+<!--/B:WIRE12-->
+</div>
+</div>
+</div>
+
+<div class="desk">
+<div class="rule1-1272"></div>
+<div class="desk-box">
+<div class="desk-lab"><div class="kicker t">THE DESK'S NOTE</div></div>
+<div class="desk-t t">{{DESK_NOTE_1}}</div>
+<div class="desk-gap"></div>
+<div class="desk-t t">{{DESK_NOTE_2}}</div>
+</div>
+</div>
+
+<div class="footer">
+<div class="rule1-1272"></div>
+<div class="footer-row">
+<div class="foot t">{{PAPER_NAME}}  ·  PAGE ONE</div>
+<div class="foot t">SET FROM THE HOME TIMELINE, RUN {{RUN_ID}}  ·  {{POSTS_READ}} POSTS READ</div>
+<div class="foot t">CONTINUED, SECTION B</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>
